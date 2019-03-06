@@ -4,6 +4,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
+
 def draw_grass():
     """ Draw the ground """
     arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, SCREEN_HEIGHT / 3, 0, arcade.color.AIR_SUPERIORITY_BLUE)
@@ -24,20 +25,25 @@ def draw_snow_person(x, y):
     arcade.draw_circle_filled(285 + x, 350 + y, 5, arcade.color.BLACK)
     arcade.draw_circle_filled(315 + x, 350 + y, 5, arcade.color.BLACK)
 
+def draw_cloud(x):
+    arcade.draw_circle_filled(x - 65, 500, 50, arcade.color.WHITE)
+    arcade.draw_circle_filled(x, 500, 50, arcade.color.WHITE)
+    arcade.draw_circle_filled(x + 65, 500, 50, arcade.color.WHITE)
 
-def main():
+def main(speed):
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
     arcade.set_background_color(arcade.color.DARK_BLUE)
     arcade.start_render()
-
     draw_grass()
-    draw_snow_person(50, 50)
+    draw_snow_person(speed, 50)
+    arcade.schedule(draw_cloud(speed), 1 / 60)
+
     # add another snowman
+
 
     # Finish and run
     arcade.finish_render()
     arcade.run()
 
-
 # Call the main function to get the program started.
-main()
+main(10)
